@@ -34,7 +34,7 @@ Follow the steps below to set up the project on your local machine.
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/tweetai-backend.git
+   git clone https://github.com/alaacodes/tweetai-backend.git
    cd tweetai-backend
    ```
 
