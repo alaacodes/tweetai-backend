@@ -1,5 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     const Post = sequelize.define('Post', {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
         title: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -12,10 +17,13 @@ module.exports = (sequelize, DataTypes) => {
         AutobotId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Autobot',
+                model: 'Autobots',
                 key: 'id',
             },
         },
+    }, {
+        tableName: 'Posts',
+        underscored: true,
     });
 
     return Post;

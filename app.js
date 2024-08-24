@@ -22,7 +22,7 @@ const swaggerOptions = {
             version: '1.0.0',
             description: 'API Documentation for TweetAI project',
         },
-        servers: [{ url: 'http://localhost:5000' }],
+        servers: [{ url: 'http://localhost:3000' }],
     },
     apis: ['./routes/*.js'],
 };
@@ -40,7 +40,7 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
     console.log(`Server is running on port ${PORT}`);
     try {

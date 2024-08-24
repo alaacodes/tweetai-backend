@@ -7,7 +7,7 @@ async function createAutobots() {
         const { data: autobots } = await axios.get('https://jsonplaceholder.typicode.com/users');
 
         for (let i = 0; i < 500; i++) {
-            const autbotData = autobots[i % autobots.length]; // Loop through available users if less than 500
+            const autbotData = autobots[i % autobots.length]; 
             const autbot = await Autobot.create({
                 name: autbotData.name,
                 username: autbotData.username,

@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config();
 
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
@@ -7,20 +7,27 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     logging: false,
 });
 
-// Import models
-const Autobot = require('./Autobot')(sequelize, Sequelize.DataTypes);
-const Post = require('./Post')(sequelize, Sequelize.DataTypes);
-const Comment = require('./Comment')(sequelize, Sequelize.DataTypes);
+const Autobot = require('./Autobot')(sequelize, DataTypes);
+const Post = require('./Post')(sequelize, DataTypes);
+const Comment = require('./Comment')(sequelize, DataTypes);
 
 // Define associations
-Autobot.hasMany(Post, { onDelete: 'CASCADE' });
-Post.belongsTo(Autobot);
-Post.hasMany(Comment, { onDelete: 'CASCADE' });
-Comment.belongsTo(Post);
+Autobot.associate = (models) => {
+    Autobot.hasMany(models.Post, { foreignKey: 'AutobotId', onDelete: 'CASCADE' });
+};
 
-// Sync models with the database
-sequelize.sync({ force: false }) // Set to `false` for production use
-    .then(() => console.log('Database & tables created!'))
-    .catch(error => console.error('Unable to create tables:', error));
+Post.associate = (models) => {
+    Post.belongsTo(models.Autobot, { foreignKey: 'AutobotId', onDelete: 'CASCADE' });
+    Post.hasMany(models.Comment, { foreignKey: 'PostId', onDelete: 'CASCADE' });
+};
+
+Comment.associate = (models) => {
+    Comment.belongsTo(models.Post, { foreignKey: 'PostId', onDelete: 'CASCADE' });
+};
+
+// Call associate functions after defining all models
+Autobot.associate({ Post });
+Post.associate({ Autobot, Comment });
+Comment.associate({ Post });
 
 module.exports = { sequelize, Autobot, Post, Comment };

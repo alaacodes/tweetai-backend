@@ -21,17 +21,17 @@ describe('createAutobots Service', () => {
             }
         });
 
-        await createAutobots(); // Run the function to test
+        await createAutobots(); 
 
         // Check that the correct number of Autobots, Posts, and Comments were created
         const autobotCount = await Autobot.count();
         expect(autobotCount).toBe(500);
 
         const postCount = await Post.count();
-        expect(postCount).toBe(5000); // 500 autobots * 10 posts each
+        expect(postCount).toBe(5000);
 
         const commentCount = await Comment.count();
-        expect(commentCount).toBe(50000); // 5000 posts * 10 comments each
+        expect(commentCount).toBe(50000);
     });
 });
 
