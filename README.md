@@ -17,7 +17,6 @@ This is the backend server for the TweetAI project. It is built using Node.js, E
 - [Rate Limiting](#rate-limiting)
 - [Swagger API Documentation](#swagger-api-documentation)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Project Setup
 
